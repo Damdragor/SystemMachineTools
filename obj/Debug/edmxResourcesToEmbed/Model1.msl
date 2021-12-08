@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище SystemMachineToolsModelContainer" CdmEntityContainer="SystemMachineToolsEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Авторизация">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Авторизация">
+        <MappingFragment StoreEntitySet="Авторизация">
+          <ScalarProperty Name="C__Кода_авторизации" ColumnName="№_Кода_авторизации" />
+          <ScalarProperty Name="Электронная_почта" ColumnName="Электронная_почта" />
+          <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+          <ScalarProperty Name="Код_доступа" ColumnName="Код_доступа" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Бригады">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Бригады">
+        <MappingFragment StoreEntitySet="Бригады">
+          <ScalarProperty Name="C__Бригады" ColumnName="№_Бригады" />
+          <ScalarProperty Name="ФИО_бригадира" ColumnName="ФИО_бригадира" />
+          <ScalarProperty Name="Фото_бригадира" ColumnName="Фото_бригадира" />
+          <ScalarProperty Name="Описание_функций_бригады" ColumnName="Описание_функций_бригады" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Виды_ремонта">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Виды_ремонта">
+        <MappingFragment StoreEntitySet="Виды_ремонта">
+          <ScalarProperty Name="Вид_ремонта" ColumnName="Вид_ремонта" />
+          <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Виды_станков">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Виды_станков">
+        <MappingFragment StoreEntitySet="Виды_станков">
+          <ScalarProperty Name="C__Вида_станка" ColumnName="№_Вида_станка" />
+          <ScalarProperty Name="Название" ColumnName="Название" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Заказы">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Заказы">
+        <MappingFragment StoreEntitySet="Заказы">
+          <ScalarProperty Name="C__Заказа" ColumnName="№_Заказа" />
+          <ScalarProperty Name="C__Станка" ColumnName="№_Станка" />
+          <ScalarProperty Name="Вид_ремонта" ColumnName="Вид_ремонта" />
+          <ScalarProperty Name="C__Бригады" ColumnName="№_Бригады" />
+          <ScalarProperty Name="Дата_сдачи" ColumnName="Дата_сдачи" />
+          <ScalarProperty Name="Дата_возврата_по_плану" ColumnName="Дата_возврата_по_плану" />
+          <ScalarProperty Name="Дата_возврата_по_факту" ColumnName="Дата_возврата_по_факту" />
+          <ScalarProperty Name="Статус_заказа" ColumnName="Статус_заказа" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Клиенты">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Клиенты">
+        <MappingFragment StoreEntitySet="Клиенты">
+          <ScalarProperty Name="C__Клиента" ColumnName="№_Клиента" />
+          <ScalarProperty Name="Название_фирмы_клиента" ColumnName="Название_фирмы_клиента" />
+          <ScalarProperty Name="Адрес_фирмы" ColumnName="Адрес_фирмы" />
+          <ScalarProperty Name="ФИО_контактного_лица" ColumnName="ФИО_контактного_лица" />
+          <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+          <ScalarProperty Name="Электронная_почта" ColumnName="Электронная_почта" />
+          <ScalarProperty Name="Имя_файла_с_фото" ColumnName="Имя_файла_с_фото" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Производители">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Производители">
+        <MappingFragment StoreEntitySet="Производители">
+          <ScalarProperty Name="C__Производителя" ColumnName="№_Производителя" />
+          <ScalarProperty Name="Название" ColumnName="Название" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Станки">
+      <EntityTypeMapping TypeName="SystemMachineToolsModel.Станки">
+        <MappingFragment StoreEntitySet="Станки">
+          <ScalarProperty Name="C__Станка" ColumnName="№_Станка" />
+          <ScalarProperty Name="C__Клиента" ColumnName="№_Клиента" />
+          <ScalarProperty Name="C__Вида_станка" ColumnName="№_Вида_станка" />
+          <ScalarProperty Name="Марка_станка" ColumnName="Марка_станка" />
+          <ScalarProperty Name="C__Производителя" ColumnName="№_Производителя" />
+          <ScalarProperty Name="Год_выпуска" ColumnName="Год_выпуска" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

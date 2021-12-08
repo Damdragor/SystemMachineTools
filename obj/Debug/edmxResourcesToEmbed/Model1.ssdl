@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище SystemMachineToolsModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Авторизация">
+    <Key>
+      <PropertyRef Name="№_Кода_авторизации" />
+    </Key>
+    <Property Name="№_Кода_авторизации" Type="int" Nullable="false" />
+    <Property Name="Электронная_почта" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Код_доступа" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Бригады">
+    <Key>
+      <PropertyRef Name="№_Бригады" />
+    </Key>
+    <Property Name="№_Бригады" Type="int" Nullable="false" />
+    <Property Name="ФИО_бригадира" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Фото_бригадира" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Описание_функций_бригады" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Виды_ремонта">
+    <Key>
+      <PropertyRef Name="Вид_ремонта" />
+    </Key>
+    <Property Name="Вид_ремонта" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Стоимость" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Виды_станков">
+    <Key>
+      <PropertyRef Name="№_Вида_станка" />
+    </Key>
+    <Property Name="№_Вида_станка" Type="int" Nullable="false" />
+    <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Заказы">
+    <Key>
+      <PropertyRef Name="№_Заказа" />
+    </Key>
+    <Property Name="№_Заказа" Type="int" Nullable="false" />
+    <Property Name="№_Станка" Type="int" Nullable="false" />
+    <Property Name="Вид_ремонта" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="№_Бригады" Type="int" Nullable="false" />
+    <Property Name="Дата_сдачи" Type="date" Nullable="false" />
+    <Property Name="Дата_возврата_по_плану" Type="date" Nullable="false" />
+    <Property Name="Дата_возврата_по_факту" Type="date" Nullable="false" />
+    <Property Name="Статус_заказа" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Клиенты">
+    <Key>
+      <PropertyRef Name="№_Клиента" />
+    </Key>
+    <Property Name="№_Клиента" Type="int" Nullable="false" />
+    <Property Name="Название_фирмы_клиента" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Адрес_фирмы" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ФИО_контактного_лица" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Телефон" Type="int" Nullable="false" />
+    <Property Name="Электронная_почта" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Имя_файла_с_фото" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Производители">
+    <Key>
+      <PropertyRef Name="№_Производителя" />
+    </Key>
+    <Property Name="№_Производителя" Type="int" Nullable="false" />
+    <Property Name="Название" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Станки">
+    <Key>
+      <PropertyRef Name="№_Станка" />
+    </Key>
+    <Property Name="№_Станка" Type="int" Nullable="false" />
+    <Property Name="№_Клиента" Type="int" Nullable="false" />
+    <Property Name="№_Вида_станка" Type="int" Nullable="false" />
+    <Property Name="Марка_станка" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="№_Производителя" Type="int" Nullable="false" />
+    <Property Name="Год_выпуска" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Заказы_Бригады">
+    <End Role="Бригады" Type="Self.Бригады" Multiplicity="1" />
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Бригады">
+        <PropertyRef Name="№_Бригады" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="№_Бригады" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Виды_ремонта">
+    <End Role="Виды_ремонта" Type="Self.Виды_ремонта" Multiplicity="1" />
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Виды_ремонта">
+        <PropertyRef Name="Вид_ремонта" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="Вид_ремонта" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Заказы_Станки">
+    <End Role="Станки" Type="Self.Станки" Multiplicity="1" />
+    <End Role="Заказы" Type="Self.Заказы" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Станки">
+        <PropertyRef Name="№_Станка" />
+      </Principal>
+      <Dependent Role="Заказы">
+        <PropertyRef Name="№_Станка" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Станки_Виды_станков">
+    <End Role="Виды_станков" Type="Self.Виды_станков" Multiplicity="1" />
+    <End Role="Станки" Type="Self.Станки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Виды_станков">
+        <PropertyRef Name="№_Вида_станка" />
+      </Principal>
+      <Dependent Role="Станки">
+        <PropertyRef Name="№_Вида_станка" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Станки_Клиенты">
+    <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="1" />
+    <End Role="Станки" Type="Self.Станки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиенты">
+        <PropertyRef Name="№_Клиента" />
+      </Principal>
+      <Dependent Role="Станки">
+        <PropertyRef Name="№_Клиента" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Станки_Производители">
+    <End Role="Производители" Type="Self.Производители" Multiplicity="1" />
+    <End Role="Станки" Type="Self.Станки" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Производители">
+        <PropertyRef Name="№_Производителя" />
+      </Principal>
+      <Dependent Role="Станки">
+        <PropertyRef Name="№_Производителя" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище SystemMachineToolsModelContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Авторизация" EntityType="Self.Авторизация" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Бригады" EntityType="Self.Бригады" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Виды_ремонта" EntityType="Self.Виды_ремонта" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Виды_станков" EntityType="Self.Виды_станков" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Заказы" EntityType="Self.Заказы" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Производители" EntityType="Self.Производители" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Станки" EntityType="Self.Станки" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Заказы_Бригады" Association="Self.FK_Заказы_Бригады">
+      <End Role="Бригады" EntitySet="Бригады" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Виды_ремонта" Association="Self.FK_Заказы_Виды_ремонта">
+      <End Role="Виды_ремонта" EntitySet="Виды_ремонта" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Заказы_Станки" Association="Self.FK_Заказы_Станки">
+      <End Role="Станки" EntitySet="Станки" />
+      <End Role="Заказы" EntitySet="Заказы" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Станки_Виды_станков" Association="Self.FK_Станки_Виды_станков">
+      <End Role="Виды_станков" EntitySet="Виды_станков" />
+      <End Role="Станки" EntitySet="Станки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Станки_Клиенты" Association="Self.FK_Станки_Клиенты">
+      <End Role="Клиенты" EntitySet="Клиенты" />
+      <End Role="Станки" EntitySet="Станки" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Станки_Производители" Association="Self.FK_Станки_Производители">
+      <End Role="Производители" EntitySet="Производители" />
+      <End Role="Станки" EntitySet="Станки" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
